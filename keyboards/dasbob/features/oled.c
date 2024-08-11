@@ -15,12 +15,11 @@ static void oled_write_os_logo(void) {
         153,154,10,
         185,186,0
     };
-    switch (get_operating_system()) {
-        case LINUX:
-            oled_write_P(linux_logo, false);
-            break;
-        case MAC:
+    if (is_operating_system_mac()) {
             oled_write("MAC\n     ", false);
+            break;
+    } else {
+            oled_write_P(linux_logo, false);
             break;
     }
 }
