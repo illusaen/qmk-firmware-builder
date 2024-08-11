@@ -48,4 +48,4 @@ enum keycodes {
 };
 
 bool is_operating_system_mac(void);
-bool toggle_operating_system(void);
+void toggle_operating_system(void);
