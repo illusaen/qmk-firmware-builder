@@ -1,5 +1,4 @@
-name: Build Custom Firmaware
-
+name: Build Custom Firmware
 on:
   push:
   workflow_dispatch:
@@ -14,11 +13,10 @@ jobs:
     container: qmkfm/qmk_cli
 
     steps:
-
     - name: Checkout custom keymaps
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      uses: actions/checkout@v4
+      # with:
+        # fetch-depth: 0
     
     - name: Clone QMK fork
       run: | 
@@ -49,7 +47,7 @@ jobs:
         make all
 
     - name: Upload compiled firmware (build artifact)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Firmware Files
         path: |
@@ -57,9 +55,10 @@ jobs:
           ./qmk_firmware/*.bin
 
     - name: Upload compiled firmware (tagged release)
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
           ./qmk_firmware/*.hex
           ./qmk_firmware/*.bin
+          ./qmk_firmware/*.uf2

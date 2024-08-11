@@ -17,10 +17,8 @@ static void oled_write_os_logo(void) {
     };
     if (is_operating_system_mac()) {
             oled_write("MAC\n     ", false);
-            break;
     } else {
             oled_write_P(linux_logo, false);
-            break;
     }
 }
 
